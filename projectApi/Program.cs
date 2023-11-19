@@ -80,4 +80,8 @@ app.UseAuthorization();
 app.MapControllers();
 #endregion
 
+#region new middleWares
+app.UseStaticFiles();
+#endregion
+
 app.Run();

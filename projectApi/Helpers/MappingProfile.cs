@@ -11,7 +11,8 @@ namespace projectApi.Helpers
         {
             CreateMap<Product, ProductToDto>()
                 .ForMember(x => x.ProductBrand, x => x.MapFrom(x => x.ProductBrand.Name))
-                .ForMember(x => x.ProductType, x => x.MapFrom(x => x.ProductType.Name));
+                .ForMember(x => x.ProductType, x => x.MapFrom(x => x.ProductType.Name))
+                .ForMember(x => x.PictureUrl, x => x.MapFrom<ProductPicture>());
         }
         #endregion
     }
