@@ -2,6 +2,7 @@
 
 using core.repo;
 using Microsoft.EntityFrameworkCore;
+using projectApi.Helpers;
 using repo.data;
 #endregion
 
@@ -27,6 +28,10 @@ builder.Services.AddSwaggerGen();
 #region scope
 //builder.Services.AddScoped<IGenericRepo<Product>,GenericRepo<Product>>();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+#endregion
+
+#region mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 #endregion
 
 #region builder
