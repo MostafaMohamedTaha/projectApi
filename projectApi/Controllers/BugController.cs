@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using projectApi.Error;
 using repo.data;
 
 namespace projectApi.Controllers
@@ -23,10 +24,11 @@ namespace projectApi.Controllers
         public ActionResult GetNotFound()
         {
             var products = _context.Products.Find(100000);
-            if (products == null) { return NotFound(); }
+            if (products == null) { return NotFound(new ApiResponse(404)); }
             return Ok(products);
         }
         #endregion
+
         #region methods serverError
         [HttpGet("serverError")]
         public ActionResult GetServerError()
@@ -36,14 +38,16 @@ namespace projectApi.Controllers
             return Ok(productToReturn);
         }
         #endregion
+
         #region methods badRequest
         [HttpGet("badRequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
         #endregion
-        #region methods badRequest
+
+        #region methods badRequest Id
         [HttpGet("badRequest/{id}")]
         public ActionResult GetBadRequest(int id)
         {

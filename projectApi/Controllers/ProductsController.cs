@@ -4,6 +4,7 @@ using core.repo;
 using core.specification;
 using Microsoft.AspNetCore.Mvc;
 using projectApi.Dto;
+using projectApi.Error;
 
 namespace projectApi.Controllers
 {
@@ -45,6 +46,7 @@ namespace projectApi.Controllers
         {
             var spec = new ProductSpec(id);
             var products = await productsRepo.GetByIdAsyncWithSpecs(spec);
+            if (products == null) return NotFound(new ApiResponse(404));
             return Ok(mapper.Map<Product, ProductToDto>(products));
         }
         #endregion
